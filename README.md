@@ -1,362 +1,204 @@
-# Replace Streamlit with HTML/CSS/JS Frontend
+# 📚 RAG-Scheduler
 
-## Complete Setup Guide
+An AI-powered course schedule assistant. Upload your timetable as a CSV and ask
+questions about it in natural language ("When is my AI class?", "What do I have
+on Tuesday afternoon?"). Answers are generated with **Retrieval-Augmented
+Generation** — the system retrieves the most relevant rows from your schedule
+and feeds them to a local LLM as context.
 
-## 📋 What We're using
+> Built end-to-end as a learning project covering modern frontend, Node.js
+> backend development, REST API design, and applied LLM workflows.
 
-**Frontend:** HTML/CSS/JS (modern web UI)
-**Backend:** Keeping FastAPI
-**Result:** Professional web interface for your RAG chatbot
+---
 
-## 📂Project Structure
+## 🧱 Stack
+
+| Layer        | Technology                                      | Why                                                      |
+| ------------ | ----------------------------------------------- | -------------------------------------------------------- |
+| Frontend     | **React** + **Vite**                            | Component-based UI, fast dev server, modern tooling      |
+| Styling      | Plain CSS with custom properties                | Lightweight, no extra build step, easy to theme          |
+| Backend      | **Node.js** + **Express**                       | Familiar HTTP framework, small surface, easy async/await |
+| Embeddings   | **Transformers.js** (`Xenova/all-MiniLM-L6-v2`) | Runs locally in Node via ONNX — no API key needed        |
+| Vector store | **HNSWLib**                                     | Same algorithm FAISS uses; fast nearest-neighbour search |
+| LLM          | **Ollama** (local, e.g. `llama2`)               | Runs on your machine; no cloud calls, no token costs     |
+| File uploads | **Multer**                                      | Standard middleware for `multipart/form-data`            |
+| CSV parsing  | **csv-parse**                                   | Battle-tested, sync API                                  |
+
+---
+
+## 🗂️ Project structure
 
 ```
 RAG-scheduler/
-├── api/
-│   └── main.py              ← UPDATED (new CORS + endpoints)
-├── app/
-│   ├── config.py
-│   ├── ingestor.py
-│   ├── retriever.py
-│   └── rag_chain.py
+├── frontend/                 React + Vite app
+│   ├── src/
+│   │   ├── components/       Sidebar, ChatWindow, MessageBubble, InputBar, UploadModal
+│   │   ├── hooks/            useChat — custom hook owning chat state
+│   │   ├── services/         api.js — centralized backend calls
+│   │   ├── styles/           global.css
+│   │   ├── App.jsx           composition root
+│   │   └── main.jsx          React entry
+│   └── package.json
+│
+├── backend/                  Node.js + Express server
+│   ├── src/
+│   │   ├── routes/api.js     /status, /ingest, /ask
+│   │   ├── services/
+│   │   │   ├── embeddings.js Transformers.js wrapper
+│   │   │   ├── vectorStore.js HNSWLib wrapper, persists to disk
+│   │   │   ├── ingestor.js   CSV → chunks → vectors → index
+│   │   │   └── ragChain.js   embed → search → prompt → Ollama
+│   │   ├── config/index.js   env-driven config
+│   │   └── server.js         Express bootstrap
+│   └── package.json
+│
 ├── data/
-│   └── Course_schedule.csv
-├── vectorstore/             ← Auto-created after ingest
-├── schedule_rag.html        ← NEW! (your HTML UI)
-├── ingest.py
-└── requirements.txt
+│   └── Course_schedule.csv   sample input
+│
+└── README.md
 ```
 
 ---
 
-## **Instructions**
+## 🚀 Run it locally
 
-### **Step 1: Prepare Your Project**
+### Prerequisites
 
-```bash
-cd RAG-scheduler
+- Node.js ≥ 18
+- [Ollama](https://ollama.com) installed locally with a model pulled:
+  ```bash
+  ollama pull llama2
+  ```
 
-# Make sure all Python packages installed
-pip install -r requirements.txt
-
-# Add CORS to requirements (if not already there)
-pip install fastapi
-```
-
-### **Step 2: Start Everything**
-
-**Terminal 1 - Start Ollama (if not running):**
+### 1. Start Ollama (Terminal 1)
 
 ```bash
 ollama serve
 ```
 
-**Terminal 2 - Start FastAPI Backend:**
+### 2. Start the backend (Terminal 2)
 
 ```bash
-cd /path/to/RAG-scheduler
-uvicorn api.main:app --reload
+cd backend
+cp .env.example .env
+npm install
+npm run dev
 ```
 
-Should see:
+Backend runs on **http://localhost:8000**.
 
+> First request to `/ingest` downloads the embedding model (~25 MB) into a
+> local cache. Subsequent runs are instant.
+
+### 3. Start the frontend (Terminal 3)
+
+```bash
+cd frontend
+npm install
+npm run dev
 ```
-INFO:     Uvicorn running on http://127.0.0.1:8000
-```
 
-**Terminal 3 - Open HTML File:**
+Frontend runs on **http://localhost:5173** and auto-opens in your browser.
 
-Option A - Simple (recommended for development):
+### 4. Use it
 
-````bash
-# Just open the file in your browser
-open schedule_rag.html
-
-## ✅ Testing the Setup
-
-1. **Open the HTML file in browser**
-   - You should see: "📚 Schedule RAG" header
-   - Upload button should be enabled
-   - Chat area should show welcome message
-
-2. **Check Backend is Running**
-   - Open browser console (F12)
-   - Try to upload a CSV
-   - Watch for network requests in Network tab
-
-3. **Check API Connection**
-   - Open http://localhost:8000 in browser
-   - Should see JSON response with endpoints
-   - Open http://localhost:8000/status
-   - Should return: `{"vectorstore_exists": false, ...}`
-
-4. **Test Upload**
-   - Click "📤 Upload CSV" button
-   - Select your `Course_schedule.csv`
-   - Wait for "Loading Schedule..." modal to finish
-   - You should see success message
-
-5. **Test Chat**
-   - Type a question: "When is my AI class?"
-   - Click Send
-   - You should get a response!
+1. Click **📤 Upload CSV** and select `data/Course_schedule.csv`
+2. Wait for ingestion to complete
+3. Ask anything: _"When is my AI class?"_, _"What's on Friday?"_
 
 ---
 
-## 🔧 File Upload Behavior
+## 🔌 REST API
 
-The HTML frontend supports two scenarios:
+| Method | Endpoint  | Purpose                                                        |
+| ------ | --------- | -------------------------------------------------------------- |
+| `GET`  | `/status` | Returns whether a vectorstore exists on disk                   |
+| `POST` | `/ingest` | Accepts a CSV upload, builds & persists the vectorstore        |
+| `POST` | `/ask`    | Accepts `{ "query": "..." }`, returns the answer + source rows |
 
-### **Scenario A: First Time Using**
-1. Click "📤 Upload CSV"
-2. Select your schedule file
-3. Backend processes it and creates vectorstore
-4. Chat becomes enabled
-5. Start asking questions
+Example:
 
-### **Scenario B: CSV Already Processed**
-1. Open the HTML file
-2. Page automatically detects vectorstore exists
-3. Chat is immediately enabled
-4. Start asking questions
+```bash
+curl -X POST http://localhost:8000/ask \
+  -H "Content-Type: application/json" \
+  -d '{"query": "When is my AI class?"}'
+```
 
----
-
-## 🎨 Customizing the HTML
-
-### **Change Colors**
-
-In the `<style>` section, modify these variables:
-
-```css
-:root {
-    --primary: #6366f1;        /* Main color */
-    --secondary: #ec4899;      /* Accent color */
-    --bg: #0f172a;             /* Dark background */
-    --text: #f1f5f9;           /* Light text */
+```json
+{
+  "response": "Your AI class is on Monday at 10am.",
+  "source_documents": [
+    {
+      "page_content": "Course: AI | Day: Mon | Time: 10am",
+      "metadata": { "source": "Course_schedule.csv", "rowIndex": 3 }
+    }
+  ]
 }
-````
-
-Example - Change to green theme:
-
-```css
---primary: #10b981; /* Green */
---secondary: #34d399; /* Light green */
-```
-
-### **Change Title and Greeting**
-
-```html
-<h1>📚 My Course Assistant</h1>
-<p>Ask me about my schedule</p>
-```
-
-### **Change Placeholder Text**
-
-```html
-<input
-  type="text"
-  placeholder="Ask about your schedule... (your custom text)"
-/>
 ```
 
 ---
 
-## 🔌 API Endpoints Reference
+## 🧠 How RAG works here
 
-Your backend now has these endpoints:
-
-### **GET /status**
-
-Check if CSV is already loaded
-
-```javascript
-fetch("http://localhost:8000/status")
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-// {"vectorstore_exists": true, "message": "..."}
+```
+                              ┌───────────────────────────┐
+   "When is my AI class?" ───▶│ embed query (MiniLM L6)   │
+                              └────────────┬──────────────┘
+                                           │ 384-dim vector
+                                           ▼
+                              ┌───────────────────────────┐
+                              │ HNSWLib top-k search      │
+                              └────────────┬──────────────┘
+                                           │ k most similar rows
+                                           ▼
+                              ┌───────────────────────────┐
+                              │ build prompt with context │
+                              └────────────┬──────────────┘
+                                           │
+                                           ▼
+                              ┌───────────────────────────┐
+                              │ Ollama (llama2) generates │
+                              └────────────┬──────────────┘
+                                           │
+                                           ▼
+                                       answer
 ```
 
-### **POST /ingest**
-
-Upload and process a CSV file
-
-```javascript
-const formData = new FormData();
-formData.append("file", file);
-
-fetch("http://localhost:8000/ingest", {
-  method: "POST",
-  body: formData,
-})
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-```
-
-### **POST /ask**
-
-Ask a question about the schedule
-
-```javascript
-fetch("http://localhost:8000/ask", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ query: "When is my AI class?" }),
-})
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-// {"response": "...", "source_documents": [...]}
-```
+Each CSV row is embedded once at ingest time. At query time, the user's
+question is embedded with the same model, the vector store returns the most
+similar rows by cosine distance, and those rows are injected into a prompt
+that constrains the LLM to answer from context — drastically reducing
+hallucination.
 
 ---
 
-## 🐛 Troubleshooting
+## 🧭 Design decisions
 
-### **Problem: CORS Error**
-
-```
-Access to XMLHttpRequest blocked by CORS policy
-```
-
-**Fix:** Make sure you updated `api/main.py` with the CORS middleware:
-
-```python
-from fastapi.middleware.cors import CORSMiddleware
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    ...
-)
-```
-
-### **Problem: Backend Not Found**
-
-```
-Failed to fetch from http://localhost:8000
-```
-
-**Fix:**
-
-1. Check if FastAPI is running: `uvicorn api.main:app --reload`
-2. Check port 8000 is not blocked: `lsof -i :8000`
-3. Try different port: `uvicorn api.main:app --port 8001`
-4. Update API_URL in HTML: `const API_URL = 'http://localhost:8001'`
-
-### **Problem: CSV Upload Fails**
-
-```
-Error loading file: HTTP 500
-```
-
-**Fix:**
-
-1. Check if vectorstore path exists: `mkdir -p vectorstore`
-2. Check CSV format is correct
-3. Check Ollama is running: `ollama serve`
-4. Look at backend terminal for error messages
-
-### **Problem: No Response from LLM**
-
-```
-Timeout or no answer received
-```
-
-**Fix:**
-
-1. Check if Ollama is running
-2. Check if model is downloaded: `ollama list`
-3. Try pulling model again: `ollama pull llama2`
-4. Check if Ollama can respond: `ollama run llama2 "hello"`
-
-### **Problem: File Upload Progress Stuck**
-
-**Fix:**
-
-1. Check backend terminal for errors
-2. Close browser, try again
-3. Check file size (should be small)
-4. Try with different CSV file
+- **React + Vite over plain HTML.** The original prototype was vanilla
+  HTML/CSS/JS. Migrated to React for component reuse, declarative state, and
+  cleaner separation of concerns.
+- **Custom `useChat` hook** instead of stuffing chat state into `App`. Keeps
+  the composition root readable and the chat logic independently testable.
+- **Service layer (`services/api.js`, `services/ragChain.js`)** so the routes
+  and components stay thin — easy to swap implementations behind the same
+  interface.
+- **Express over Fastify/Koa.** Most familiar Node framework, easiest for
+  someone new to the codebase to navigate.
+- **Local embeddings (Transformers.js) over OpenAI.** No API key, no per-call
+  cost, no privacy concerns about uploading schedules to a third party.
+- **HNSWLib over a SQL DB** for vector search. Purpose-built for ANN search
+  over high-dimensional vectors — orders of magnitude faster than scanning a
+  table for cosine similarity.
+- **Same REST contract as the original FastAPI version.** Backend was
+  rewritten in Node.js without touching the frontend — possible only because
+  the API was well-defined upfront.
 
 ---
 
-## 📱 Mobile Support
+## 🛣️ Possible next steps
 
-The HTML interface is responsive and works on mobile!
-
-**On mobile:**
-
-- Sidebar is hidden
-- Input area is full width
-- Touch-friendly buttons
-- Optimized chat layout
-
-Test on mobile:
-
-1. Open developer tools (F12)
-2. Click device toggle (phone icon)
-3. Select iPhone or Android
-4. Test chat and file upload
-
----
-
-## 🚀 Deploy to the Internet
-
-Once working locally, you can deploy!
-
-### **Option 1: Deploy Frontend to Vercel (Free)**
-
-1. Create a GitHub repo with your HTML file
-2. Go to vercel.com
-3. Import GitHub repo
-4. Done! It's live
-
-Update API_URL to your backend:
-
-```javascript
-const API_URL = "https://your-backend.fly.dev"; // or wherever you host FastAPI
-```
-
-### **Option 2: Deploy Backend to Fly.io (Free)**
-
-1. Install flyctl: https://fly.io/docs/getting-started/
-2. Run: `fly launch`
-3. Run: `fly deploy`
-4. Get URL from fly.io
-5. Update API_URL in HTML
-
-### **Option 3: Deploy Both to Railway.app**
-
-1. Create Railway.app account
-2. Connect GitHub
-3. Deploy both frontend and backend
-4. Set environment variables
-
----
-
-## 📝 Next Steps
-
-1. ✅ Update `api/main.py` with new code
-2. ✅ Save `schedule_rag.html` to project
-3. ✅ Run `uvicorn api.main:app --reload`
-4. ✅ Open `schedule_rag.html` in browser
-5. ✅ Upload CSV and test chat
-6. ✅ Customize colors and text
-7. 🚀 Deploy online (optional)
-
----
-
-## 💡 Pro Tips
-
-1. **Save API_URL as environment variable** (for production)
-2. **Add authentication** (if needed)
-3. **Add analytics** (track usage)
-4. **Cache responses** (faster subsequent queries)
-5. **Add dark/light mode toggle** (user preference)
-6. **Export chat history** (allow users to download)
-7. **Rate limiting** (protect backend from spam)
-8. **Use WebSocket for real-time** (if lots of users)
-
----
-
-Good luck! 🎉 Let me know if you hit any issues!
+- Stream LLM responses (`stream: true` from Ollama) for token-by-token UI
+- Add chat history persistence (SQLite or DuckDB)
+- Move from CSV-only to PDF/Notion/Google Calendar ingestion
+- Authentication and per-user vectorstores
+- Deploy: Vercel (frontend) + Fly.io (backend with Ollama)
