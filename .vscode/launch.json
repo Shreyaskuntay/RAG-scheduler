@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "Step 1 - Ingest CSV into ChromaDB",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "c:/SRH BD AI/AI/AIVENV/Scripts/python.exe",
+            "program": "${workspaceFolder}/ingest.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+
+        {
+            "name": "Step 2 - FastAPI backend",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "c:/SRH BD AI/AI/AIVENV/Scripts/python.exe",
+            "module": "uvicorn",
+            "args": ["api.main:app", "--reload", "--port", "8000"],
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+
+        {
+            "name": "Step 3 - Streamlit UI",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "c:/SRH BD AI/AI/AIVENV/Scripts/python.exe",
+            "module": "streamlit",
+            "args": ["run", "${workspaceFolder}/ui/streamlit_app.py"],
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        },
+
+        {
+            "name": "Debug - rag_chain only (test a question)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "c:/SRH BD AI/AI/AIVENV/Scripts/python.exe",
+            "program": "${workspaceFolder}/debug_chain.py",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        }
+    ]
+}

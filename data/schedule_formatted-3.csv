@@ -1,0 +1,51 @@
+Event,Room NO,Date,fromtime,totime,lecturer,group,event type
+Artificial Intelligence (BD),CUBE 1.06 Seminar*,2026-04-13,09:00,13:15,Shreyaasri Prakash,General,Lecture
+Artificial Intelligence (BD),CUBE 1.06 Seminar*,2026-04-15,14:15,18:30,Shreyaasri Prakash,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-04-16,14:15,18:30,Nasneen Mansoor,General,Lecture
+Artificial Intelligence (BD),SHED D0.33 Robotic Lab,2026-04-17,09:00,13:15,Shreyaasri Prakash,General,Lab
+Artificial Intelligence (BD),Son 4.01 Seminar (Sonnenallee 223),2026-04-20,09:00,13:15,Shreyaasri Prakash,General,Lecture
+Big Data and Business Intelligence,SHED B0.11 Seminar,2026-04-20,15:15,19:15,Nasneen Mansoor,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-04-22,09:00,13:15,Nasneen Mansoor,General,Lecture
+Artificial Intelligence (BD),SHED D0.33 Robotic Lab,2026-04-22,14:15,18:30,Shreyaasri Prakash,General,Lab
+Artificial Intelligence (BD),SHED D0.33 Robotic Lab,2026-04-24,09:00,13:15,Shreyaasri Prakash,General,Lab
+Artificial Intelligence (BD),SHED C0.27 Mechatronic Lab,2026-04-27,09:00,13:15,Shreyaasri Prakash,General,Lab
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-04-29,09:00,13:15,Nasneen Mansoor,General,Lecture
+Artificial Intelligence (BD),Son 4.01 Seminar (Sonnenallee 223),2026-04-29,14:15,18:30,Shreyaasri Prakash,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-04-30,09:00,13:15,Nasneen Mansoor,General,Lecture
+Artificial Intelligence (BD),Online,2026-05-04,09:00,13:15,Shreyaasri Prakash,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-05-06,09:00,13:15,Nasneen Mansoor,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-05-07,14:15,18:30,Nasneen Mansoor,General,Lecture
+Artificial Intelligence,Son 0.01 (Sonnenallee 223),2026-05-11,10:00,12:00,Shreyaasri Prakash,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-05-13,09:00,13:15,Nasneen Mansoor,General,Lecture
+AI Use Cases,Son 4.01 Seminar (Sonnenallee 223),2026-05-19,09:00,13:15,Iliev Alexander I,General,Lecture
+Cloud Solutions (BD),CUBE 0.01 Community Space,2026-05-19,14:15,18:30,Stantchev Vladimir,General,Lecture
+AI Use Cases,Son 0.01 (Sonnenallee 223),2026-05-20,09:00,13:15,Iliev Alexander I,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-05-21,09:00,13:15,Nasneen Mansoor,General,Lecture
+AI Use Cases,Online,2026-05-22,09:00,13:15,Iliev Alexander I,General,Lecture
+AI Use Cases,Online,2026-05-26,09:00,13:15,Iliev Alexander I,General,Lecture
+AI Use Cases,Online,2026-05-27,09:00,13:15,Iliev Alexander I,General,Lecture
+Cloud Solutions (BD),Son 4.01 Seminar (Sonnenallee 223),2026-05-27,14:15,18:30,Stantchev Vladimir,General,Lecture
+Big Data and Business Intelligence,CUBE 1.06 Seminar*,2026-05-28,14:15,18:30,Nasneen Mansoor,General,Lecture
+AI Use Cases,Online,2026-05-29,09:00,13:15,Iliev Alexander I,General,Lecture
+AI Use Cases,SHED B0.09 Seminar*,2026-06-02,09:00,13:15,Iliev Alexander I,General,Lecture
+AI Use Cases,Son 3.04 Seminar (Sonnenallee 223),2026-06-03,09:00,13:15,Iliev Alexander I,General,Lecture
+Cloud Solutions (BD),Son 0.01 (Sonnenallee 223),2026-06-03,14:15,18:30,Stantchev Vladimir,General,Lecture
+AI Use Cases,SHED A5.06 Seminar*,2026-06-04,14:15,18:30,Iliev Alexander I,General,Lecture
+AI Use Cases,SHED A5.06 Seminar*,2026-06-05,09:00,11:30,Iliev Alexander I,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-06-09,09:00,12:15,Nobakht Keivan,General,Lecture
+Cloud Solutions (BD),Son 0.01 (Sonnenallee 223),2026-06-09,14:15,18:30,Stantchev Vladimir,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-06-11,09:00,12:15,Nobakht Keivan,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-06-16,09:00,12:15,Nobakht Keivan,General,Lecture
+Cloud Solutions (BD),SHED A5.06 Seminar*,2026-06-16,14:15,18:30,Stantchev Vladimir,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-06-18,09:00,12:15,Nobakht Keivan,General,Lecture
+Open Source Intelligence,Son 3.04 Seminar (Sonnenallee 223),2026-06-23,09:00,12:15,Nobakht Keivan,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-06-25,09:00,12:15,Nobakht Keivan,General,Lecture
+Open Source Intelligence,Son 3.04 Seminar (Sonnenallee 223),2026-06-30,09:00,12:15,Nobakht Keivan,General,Lecture
+Cloud Solutions (BD),Son 0.01 (Sonnenallee 223),2026-06-30,14:15,18:30,Stantchev Vladimir,General,Lecture
+Cloud Solutions (BD),SHED B0.09 Seminar*,2026-07-02,09:00,13:15,Stantchev Vladimir,General,Lecture
+Open Source Intelligence,Son 3.04 Seminar (Sonnenallee 223),2026-07-07,09:00,12:15,Nobakht Keivan,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-07-09,09:00,12:15,Nobakht Keivan,General,Lecture
+Cloud Solutions (BD),Son 4.01 Seminar (Sonnenallee 223),2026-07-14,14:15,18:30,Stantchev Vladimir,General,Lecture
+Open Source Intelligence,SHED A5.06 Seminar*,2026-07-16,09:00,12:15,Nobakht Keivan,General,Lecture
+Cloud Solutions (BD),Son 4.01 Seminar (Sonnenallee 223),2026-07-21,14:15,18:30,Stantchev Vladimir,General,Lecture
+Open Source Intelligence,Son 4.08 Seminar (Sonnenallee 223),2026-07-23,09:00,12:15,Nobakht Keivan,General,Lecture

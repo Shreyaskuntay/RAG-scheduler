@@ -1,0 +1,46 @@
+Event,Room NO,Date,fromtime,totime,lecturer,group,event type
+Data Ethics Discussion,Lab-01,2025-10-24,16:00,18:00,Prof. Johnson,Graduate-S2,Exam
+Intro to AI,C-303,2025-10-19,09:00,11:00,Prof. Chen,Graduate-S2,Exam
+Big Data Analytics,Lab-01,2025-10-27,12:00,13:00,Dr. Lee,Graduate-S2,Exam
+Machine Learning Optimization,C-303,2025-10-01,16:00,19:00,Dr. Muller,Group A,Exam
+Advanced Statistics,Lab-01,2025-10-28,14:00,17:00,Dr. Ivanov,Group C,Lab
+Cloud Computing Workshop,Auditorium-1,2025-10-03,12:00,14:00,Dr. Muller,Graduate-S1,Exam
+Intro to AI,Auditorium-1,2025-10-09,08:00,10:00,Dr. Lee,Group B,Workshop
+Natural Language Processing,E-505,2025-10-01,08:00,11:00,Dr. Smith,Group A,Lab
+Scalable Systems,C-303,2025-10-19,08:00,10:00,Prof. Johnson,Group C,Exam
+Python for Data Science,E-505,2025-10-13,08:00,10:00,Dr. Ivanov,Graduate-S1,Workshop
+Intro to AI,B-202,2025-10-07,08:00,11:00,Dr. Smith,Graduate-S2,Exam
+Cloud Computing Workshop,A-101,2025-10-17,13:00,14:00,Prof. Garcia,Graduate-S2,Lecture
+Intro to AI,D-404,2025-10-07,13:00,14:00,Prof. Garcia,Group C,Lecture
+Neural Networks Lab,Auditorium-1,2025-10-11,15:00,17:00,Prof. Garcia,Graduate-S1,Exam
+Scalable Systems,A-101,2025-10-02,14:00,17:00,Prof. Garcia,Graduate-S1,Lab
+Advanced Statistics,E-505,2025-10-20,15:00,17:00,Dr. Muller,Group C,Exam
+Data Ethics Discussion,A-101,2025-10-07,11:00,12:00,Dr. Ivanov,Group B,Lecture
+Scalable Systems,A-101,2025-10-23,08:00,10:00,Dr. Muller,Group C,Lecture
+Machine Learning Optimization,E-505,2025-10-15,09:00,12:00,Dr. Lee,Group A,Lecture
+Distributed Databases,Lab-01,2025-10-08,08:00,09:00,Dr. Muller,Group A,Exam
+Distributed Databases,D-404,2025-10-01,09:00,11:00,Dr. Muller,Group A,Workshop
+Cloud Computing Workshop,B-202,2025-10-08,11:00,12:00,Prof. Chen,Graduate-S1,Lecture
+Deep Learning Seminar,Auditorium-1,2025-10-22,15:00,16:00,Dr. Smith,Group A,Lab
+Advanced Statistics,D-404,2025-10-23,10:00,12:00,Dr. Smith,Group A,Exam
+Natural Language Processing,A-101,2025-10-28,15:00,17:00,Dr. Smith,Graduate-S1,Seminar
+Computer Vision Basics,B-202,2025-10-19,10:00,11:00,Dr. Muller,Group C,Exam
+Neural Networks Lab,D-404,2025-10-12,15:00,17:00,Prof. Garcia,Group A,Workshop
+Distributed Databases,Auditorium-1,2025-10-18,13:00,14:00,Prof. Chen,Group B,Lecture
+Cloud Computing Workshop,Auditorium-1,2025-10-10,08:00,09:00,Prof. Johnson,Group C,Workshop
+Big Data Analytics,Auditorium-1,2025-10-20,14:00,16:00,Dr. Ivanov,Group A,Lecture
+Scalable Systems,D-404,2025-10-30,13:00,16:00,Prof. Chen,Graduate-S2,Seminar
+Distributed Databases,B-202,2025-10-21,15:00,16:00,Dr. Lee,Group B,Seminar
+AI Ethics,Lab-01,2025-10-10,16:00,17:00,Dr. Lee,Graduate-S2,Workshop
+Neural Networks Lab,E-505,2025-10-14,16:00,17:00,Dr. Ivanov,Group B,Workshop
+AI Ethics,A-101,2025-10-12,15:00,16:00,Dr. Muller,Group B,Lab
+Cloud Computing Workshop,Lab-01,2025-10-16,13:00,14:00,Dr. Muller,Graduate-S2,Seminar
+Computer Vision Basics,Auditorium-1,2025-10-23,09:00,10:00,Dr. Lee,Group B,Workshop
+Scalable Systems,D-404,2025-10-07,11:00,14:00,Dr. Ivanov,Graduate-S1,Seminar
+Natural Language Processing,A-101,2025-10-23,10:00,11:00,Dr. Muller,Group C,Lab
+Machine Learning Optimization,Lab-01,2025-10-30,13:00,15:00,Prof. Garcia,Group B,Lab
+Distributed Databases,E-505,2025-10-16,15:00,18:00,Prof. Garcia,Group B,Lab
+Machine Learning Optimization,Lab-01,2025-10-06,08:00,10:00,Dr. Lee,Group C,Workshop
+Python for Data Science,E-505,2025-10-09,11:00,12:00,Dr. Ivanov,Graduate-S2,Lab
+Neural Networks Lab,Auditorium-1,2025-10-26,10:00,11:00,Prof. Garcia,Group B,Lecture
+AI Ethics,D-404,2025-10-02,11:00,12:00,Dr. Lee,Group B,Workshop
